@@ -1,8 +1,9 @@
 # AutoDL Setup
 
 AutoDL images often configure pip to use the Aliyun mirror by default. Some
-newer or niche packages, including AppWorld, may not be available there. Use
-the official PyPI index when installing this project's requirements.
+newer or niche packages, including AppWorld, may not be available there. Prefer
+the Tsinghua mirror for speed, and install AppWorld from official PyPI if the
+mirror cannot find it.
 
 This project treats AutoDL as a reproducible experiment base rather than a
 single fixed development machine. Keep code, datasets, checkpoints, and logs in
@@ -90,18 +91,25 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 
 ## 4. Install Project Requirements
 
-Use official PyPI, not the default AutoDL mirror:
+Use the Tsinghua mirror for most packages:
 
 ```bash
-pip install -r requirements.txt -i https://pypi.org/simple
+python -m pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
-If official PyPI is slow, install AppWorld from official PyPI first, then use a
-mirror for the rest:
+If the mirror cannot find AppWorld, install AppWorld from official PyPI first,
+then install the rest through Tsinghua:
 
 ```bash
-pip install appworld -i https://pypi.org/simple
-pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+python -m pip install appworld -i https://pypi.org/simple
+python -m pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+```
+
+If official PyPI is slow from your instance, use the official index only for
+AppWorld with a longer timeout:
+
+```bash
+python -m pip install appworld -i https://pypi.org/simple --timeout 120
 ```
 
 ## 5. Install AppWorld Data
