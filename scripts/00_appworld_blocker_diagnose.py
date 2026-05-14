@@ -21,9 +21,12 @@ from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 from urllib.request import Request, urlopen
 
+from dotenv import load_dotenv
+
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 REPORT_DIR = PROJECT_ROOT / "reports"
+load_dotenv(PROJECT_ROOT / ".env")
 
 
 URLS = [

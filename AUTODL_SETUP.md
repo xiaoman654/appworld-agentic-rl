@@ -120,18 +120,22 @@ Put AppWorld data under persistent storage:
 export APPWORLD_ROOT=/root/autodl-fs/datasets/appworld_root
 mkdir -p "$APPWORLD_ROOT"
 echo "APPWORLD_ROOT=$APPWORLD_ROOT" > .env
+echo "HF_HOME=/root/autodl-tmp/hf_home" >> .env
+echo "TRANSFORMERS_CACHE=/root/autodl-tmp/hf_home" >> .env
+echo "HF_DATASETS_CACHE=/root/autodl-tmp/hf_home/datasets" >> .env
+echo "WANDB_DIR=/root/autodl-fs/outputs/wandb" >> .env
 ```
 
 ```bash
 appworld install
-appworld download data
+appworld download --root "$APPWORLD_ROOT" data
 ```
 
 If the CLI is unavailable:
 
 ```bash
 python -m appworld.cli install
-python -m appworld.cli download data
+python -m appworld.cli download --root "$APPWORLD_ROOT" data
 ```
 
 If the data download is slow, interrupted, or fails without a clear message,
@@ -142,7 +146,7 @@ tmux new -s appworld_download
 conda activate appworld_rl
 cd /root/autodl-fs/repos/appworld-agentic-rl
 export APPWORLD_ROOT=/root/autodl-fs/datasets/appworld_root
-python -m appworld.cli download data 2>&1 | tee /root/autodl-fs/outputs/logs/appworld_download.log
+python -m appworld.cli download --root "$APPWORLD_ROOT" data 2>&1 | tee /root/autodl-fs/outputs/logs/appworld_download.log
 ```
 
 If it still fails, inspect the command and package path:

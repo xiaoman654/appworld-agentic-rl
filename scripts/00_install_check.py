@@ -23,10 +23,13 @@ from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 from typing import Any
 
+from dotenv import load_dotenv
+
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 REPORT_DIR = PROJECT_ROOT / "reports"
 DATA_DIR = PROJECT_ROOT / "data"
+load_dotenv(PROJECT_ROOT / ".env")
 
 
 PACKAGES = [

@@ -651,14 +651,14 @@ python -m virtualenv /kaggle/working/appworld_venv
 /kaggle/working/appworld_venv/bin/python -m pip install wrapt
 /kaggle/working/appworld_venv/bin/python -m pip install -r "$PROJECT_DIR/requirements.txt"
 /kaggle/working/appworld_venv/bin/appworld install
-/kaggle/working/appworld_venv/bin/appworld download data
+/kaggle/working/appworld_venv/bin/appworld download --root /kaggle/working/appworld_root data
 ```
 
 如 `appworld` 命令不可用，使用：
 
 ```bash
 /kaggle/working/appworld_venv/bin/python -m appworld.cli install
-/kaggle/working/appworld_venv/bin/python -m appworld.cli download data
+/kaggle/working/appworld_venv/bin/python -m appworld.cli download --root /kaggle/working/appworld_root data
 ```
 
 ### AutoDL

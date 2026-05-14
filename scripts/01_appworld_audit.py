@@ -19,10 +19,13 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from dotenv import load_dotenv
+
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 REPORT_DIR = PROJECT_ROOT / "reports"
 RAW_AUDIT_DIR = PROJECT_ROOT / "data" / "raw" / "appworld_audit"
+load_dotenv(PROJECT_ROOT / ".env")
 
 
 def serialize_object(value: Any) -> Any:
