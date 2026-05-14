@@ -4,10 +4,13 @@
 # Kaggle packages and produce many resolver warnings.
 #
 # Kaggle example:
+#   cd /kaggle/working/<your-repo-dir>
+#   PROJECT_DIR="$(pwd)"
 #   python -m pip install --user virtualenv
 #   python -m virtualenv /kaggle/working/appworld_venv
 #   /kaggle/working/appworld_venv/bin/python -m pip install --upgrade pip setuptools wheel
-#   /kaggle/working/appworld_venv/bin/python -m pip install -r requirements.txt
+#   /kaggle/working/appworld_venv/bin/python -m pip install wrapt
+#   /kaggle/working/appworld_venv/bin/python -m pip install -r "$PROJECT_DIR/requirements.txt"
 #
 # AutoDL example:
 #   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124

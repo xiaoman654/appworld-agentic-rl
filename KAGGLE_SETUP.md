@@ -11,11 +11,13 @@ environment's Python.
 ## 1. Create Environment
 
 ```bash
-cd /kaggle/working/appworld-curriculum-agent-rl
+cd /kaggle/working/<your-repo-dir>
+PROJECT_DIR="$(pwd)"
 python -m pip install --user virtualenv
 python -m virtualenv /kaggle/working/appworld_venv
 /kaggle/working/appworld_venv/bin/python -m pip install --upgrade pip setuptools wheel
-/kaggle/working/appworld_venv/bin/python -m pip install -r requirements.txt
+/kaggle/working/appworld_venv/bin/python -m pip install wrapt
+/kaggle/working/appworld_venv/bin/python -m pip install -r "$PROJECT_DIR/requirements.txt"
 ```
 
 Use `virtualenv` instead of `python -m venv` on Kaggle because some Kaggle
@@ -38,6 +40,7 @@ If the CLI is not visible:
 ## 3. Run C0 Audit
 
 ```bash
+cd /kaggle/working/<your-repo-dir>
 /kaggle/working/appworld_venv/bin/python scripts/00_install_check.py --run-verify-tests
 /kaggle/working/appworld_venv/bin/python scripts/01_appworld_audit.py --split train --num-tasks 3 --run-verify-tasks
 ```
@@ -55,6 +58,7 @@ In a Kaggle notebook cell, use shell commands with the virtual environment
 explicitly:
 
 ```bash
+%cd /kaggle/working/<your-repo-dir>
 !/kaggle/working/appworld_venv/bin/python scripts/00_install_check.py
 !/kaggle/working/appworld_venv/bin/python scripts/01_appworld_audit.py --split train --num-tasks 3
 ```

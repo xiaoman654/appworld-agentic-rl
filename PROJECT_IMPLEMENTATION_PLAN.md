@@ -609,10 +609,13 @@ python scripts/01_appworld_audit.py --split train --num-tasks 3
 建议使用独立虚拟环境运行 AppWorld。Kaggle/Colab 预装环境里很多包依赖 Pydantic v2，而 AppWorld 0.1.x 依赖 Pydantic v1；如果直接在全局环境安装，会出现大量依赖冲突警告。
 
 ```bash
+cd /kaggle/working/<your-repo-dir>
+PROJECT_DIR="$(pwd)"
 python -m pip install --user virtualenv
 python -m virtualenv /kaggle/working/appworld_venv
 /kaggle/working/appworld_venv/bin/python -m pip install --upgrade pip setuptools wheel
-/kaggle/working/appworld_venv/bin/python -m pip install -r requirements.txt
+/kaggle/working/appworld_venv/bin/python -m pip install wrapt
+/kaggle/working/appworld_venv/bin/python -m pip install -r "$PROJECT_DIR/requirements.txt"
 /kaggle/working/appworld_venv/bin/appworld install
 /kaggle/working/appworld_venv/bin/appworld download data
 ```
