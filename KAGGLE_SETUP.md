@@ -12,33 +12,34 @@ environment's Python.
 
 ```bash
 cd /kaggle/working/appworld-curriculum-agent-rl
-python -m venv /kaggle/working/appworld_venv
-source /kaggle/working/appworld_venv/bin/activate
-pip install --upgrade pip setuptools wheel
-pip install -r requirements.txt
+python -m pip install --user virtualenv
+python -m virtualenv /kaggle/working/appworld_venv
+/kaggle/working/appworld_venv/bin/python -m pip install --upgrade pip setuptools wheel
+/kaggle/working/appworld_venv/bin/python -m pip install -r requirements.txt
 ```
+
+Use `virtualenv` instead of `python -m venv` on Kaggle because some Kaggle
+images fail while running `ensurepip` during standard-library venv creation.
 
 ## 2. Install AppWorld Data
 
 ```bash
-source /kaggle/working/appworld_venv/bin/activate
-appworld install
-appworld download data
+/kaggle/working/appworld_venv/bin/appworld install
+/kaggle/working/appworld_venv/bin/appworld download data
 ```
 
 If the CLI is not visible:
 
 ```bash
-python -m appworld.cli install
-python -m appworld.cli download data
+/kaggle/working/appworld_venv/bin/python -m appworld.cli install
+/kaggle/working/appworld_venv/bin/python -m appworld.cli download data
 ```
 
 ## 3. Run C0 Audit
 
 ```bash
-source /kaggle/working/appworld_venv/bin/activate
-python scripts/00_install_check.py --run-verify-tests
-python scripts/01_appworld_audit.py --split train --num-tasks 3 --run-verify-tasks
+/kaggle/working/appworld_venv/bin/python scripts/00_install_check.py --run-verify-tests
+/kaggle/working/appworld_venv/bin/python scripts/01_appworld_audit.py --split train --num-tasks 3 --run-verify-tasks
 ```
 
 The generated reports are:
