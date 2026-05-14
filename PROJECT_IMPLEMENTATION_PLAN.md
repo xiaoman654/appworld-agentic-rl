@@ -689,6 +689,7 @@ trl vllm-serve --model Qwen/Qwen2.5-Coder-7B-Instruct
 - 如果 rollout group 大量全 0，降低任务难度，缩短 max_steps，回到 easy single-app。
 - 如果 GRPO 后 collateral damage 上升，提高 state-aware penalty，减少 high-risk 任务比例。
 - 如果 final-only GRPO 不提升，不直接否定 GRPO，先检查 reward 方差和 rollout 质量。
+- 如果 `appworld install` 或 `appworld download data` 被网络/远端源阻塞，先运行 `scripts/00_appworld_blocker_diagnose.py` 生成诊断报告；同时推进非 AppWorld 阻塞工作，包括目录结构、配置、prompt/parser、rollout 日志 schema、失败类型 taxonomy、API-model dry run stub。AppWorld 真实执行可以延后到网络可用或更换实例后恢复。
 
 ## 12. 最终交付物
 

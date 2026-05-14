@@ -161,6 +161,21 @@ Then send the last 50 lines of the log:
 tail -n 50 /root/autodl-fs/outputs/logs/appworld_download.log
 ```
 
+You can also run the project diagnostic script before spending more GPU time:
+
+```bash
+python scripts/00_appworld_blocker_diagnose.py
+cat reports/appworld_blocker_diagnose.md
+```
+
+If AppWorld data remains blocked, continue with non-AppWorld work:
+
+- Build repo structure and config files.
+- Implement prompt, parser, rollout log schema, and failure taxonomy.
+- Add API-model based dry-run stubs.
+- Prepare C1 model-audit scripts behind a mock AppWorld client.
+- Move AppWorld-dependent execution to a later step or another network.
+
 ## 6. Run C0 Audit
 
 ```bash
