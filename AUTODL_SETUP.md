@@ -114,6 +114,14 @@ python -m pip install appworld -i https://pypi.org/simple --timeout 120
 
 ## 5. Install AppWorld Data
 
+Put AppWorld data under persistent storage:
+
+```bash
+export APPWORLD_ROOT=/root/autodl-fs/datasets/appworld_root
+mkdir -p "$APPWORLD_ROOT"
+echo "APPWORLD_ROOT=$APPWORLD_ROOT" > .env
+```
+
 ```bash
 appworld install
 appworld download data
@@ -124,6 +132,33 @@ If the CLI is unavailable:
 ```bash
 python -m appworld.cli install
 python -m appworld.cli download data
+```
+
+If the data download is slow, interrupted, or fails without a clear message,
+run it in `tmux` and save the log:
+
+```bash
+tmux new -s appworld_download
+conda activate appworld_rl
+cd /root/autodl-fs/repos/appworld-agentic-rl
+export APPWORLD_ROOT=/root/autodl-fs/datasets/appworld_root
+python -m appworld.cli download data 2>&1 | tee /root/autodl-fs/outputs/logs/appworld_download.log
+```
+
+If it still fails, inspect the command and package path:
+
+```bash
+python -m appworld.cli download --help
+python - <<'PY'
+import appworld
+print(appworld.__file__)
+PY
+```
+
+Then send the last 50 lines of the log:
+
+```bash
+tail -n 50 /root/autodl-fs/outputs/logs/appworld_download.log
 ```
 
 ## 6. Run C0 Audit
