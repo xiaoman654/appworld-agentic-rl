@@ -1,5 +1,14 @@
-# Install PyTorch separately to match the runtime CUDA.
-# Kaggle T4 usually ships with torch already installed.
+# Install this file inside an isolated virtual environment.
+# AppWorld 0.1.x depends on Pydantic v1, while Kaggle/Colab preinstalled
+# packages often require Pydantic v2. Installing globally can downgrade
+# Kaggle packages and produce many resolver warnings.
+#
+# Kaggle example:
+#   python -m venv /kaggle/working/appworld_venv
+#   source /kaggle/working/appworld_venv/bin/activate
+#   pip install --upgrade pip setuptools wheel
+#   pip install -r requirements.txt
+#
 # AutoDL example:
 #   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 
@@ -48,9 +57,7 @@ seaborn>=0.13.2
 plotly>=5.24.0
 networkx>=3.4.0
 
-# Notebooks and development
-ipykernel>=6.29.0
-jupyter>=1.1.1
+# Development
 pytest>=8.3.0
 ruff>=0.9.0
 
