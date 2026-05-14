@@ -59,6 +59,21 @@
 - GPU 1: rollout/vLLM server，或双卡 DDP/Accelerate。
 - GRPO 初期优先使用较小 `num_generations=4`、`max_completion_length=512`、`max_prompt_length=3072`，稳定后再扩展。
 
+路径规划：
+
+- 代码仓库：`/root/autodl-fs/repos/appworld-agentic-rl/`
+- 长期数据：`/root/autodl-fs/datasets/`
+- 长期结果：`/root/autodl-fs/outputs/`
+- Hugging Face 缓存：`/root/autodl-tmp/hf_home/`
+- 高 IO 临时文件：`/root/autodl-tmp/scratch/`
+
+环境规划：
+
+- 当前主环境：`appworld_rl`，Python 3.11，包含 AppWorld、Transformers、TRL、PEFT、bitsandbytes，用于 C0/C1 和后续小规模 dry run。
+- 若后续 BFCL/其它 benchmark 与 AppWorld 依赖冲突，再拆出 `agentic_rl` 训练环境，通过 rollout/reward 文件与 `appworld_rl` 交换数据。
+- 长任务统一用 `tmux`，日志写到 `/root/autodl-fs/outputs/logs/`。
+- 重要 ckpt、rollout、评估报告写到 `/root/autodl-fs/outputs/`，不要只留在 `/root/autodl-tmp/`。
+
 ## 3. 推荐目录结构
 
 ```text
