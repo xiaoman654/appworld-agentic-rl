@@ -9,7 +9,11 @@
 #   conda activate appworld_rl
 #   pip install --upgrade pip setuptools wheel
 #   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
-#   pip install -r requirements.txt
+#   pip install -r requirements.txt -i https://pypi.org/simple
+#
+# AutoDL may default to the Aliyun PyPI mirror, which may not contain AppWorld.
+# If you see "No matching distribution found for appworld", install with the
+# official PyPI index as shown above.
 #
 # Python 3.11 is the recommended project environment. Python 3.12 may work with
 # AppWorld, but 3.11 is usually safer for the broader training stack

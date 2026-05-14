@@ -555,7 +555,7 @@ mu = 0.5
 推荐先运行：
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements.txt -i https://pypi.org/simple
 appworld install
 appworld download data
 python scripts/00_install_check.py --run-verify-tests
@@ -652,7 +652,7 @@ python -m virtualenv /kaggle/working/appworld_venv
 ```bash
 pip install --upgrade pip
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-pip install -r requirements.txt
+pip install -r requirements.txt -i https://pypi.org/simple
 appworld install
 appworld download data
 ```
