@@ -534,6 +534,25 @@ mu = 0.5
 3. 跑通 reference solution。
 4. 固定 rollout/eval 日志 schema。
 
+推荐先运行：
+
+```bash
+pip install -r requirements.txt
+appworld install
+appworld download data
+python scripts/00_install_check.py --run-verify-tests
+python scripts/01_appworld_audit.py --split train --num-tasks 3 --run-verify-tasks
+```
+
+如果 Kaggle 中 `appworld` 命令不可用，改用：
+
+```bash
+python -m appworld.cli install
+python -m appworld.cli download data
+python scripts/00_install_check.py
+python scripts/01_appworld_audit.py --split train --num-tasks 3
+```
+
 ### 第 2 周: 基座审计
 
 1. 抽取 30-50 个任务。
