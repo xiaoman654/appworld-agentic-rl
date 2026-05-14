@@ -5,6 +5,9 @@ Pydantic v2. AppWorld 0.1.x requires Pydantic v1, so installing AppWorld into
 the global Kaggle environment will trigger dependency warnings and may break
 unrelated Kaggle packages.
 
+AppWorld currently requires Python `>=3.11,<4.0`. Use Python 3.11 for the
+isolated environment where possible.
+
 Use an isolated virtual environment and run project scripts through that
 environment's Python.
 

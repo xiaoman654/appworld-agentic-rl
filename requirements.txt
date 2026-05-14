@@ -1,18 +1,21 @@
-# Install this file inside an isolated virtual environment.
-# AppWorld 0.1.x depends on Pydantic v1, while Kaggle/Colab preinstalled
-# packages often require Pydantic v2. Installing globally can downgrade
-# Kaggle packages and produce many resolver warnings.
+# Install this file in a clean conda/virtualenv environment.
+# AppWorld 0.1.x depends on Pydantic v1, so avoid installing this into a
+# busy global Python environment such as Kaggle/Colab's base kernel.
 #
-# Kaggle example:
-#   cd /kaggle/working/<your-repo-dir>
-#   PROJECT_DIR="$(pwd)"
-#   python -m pip install --user virtualenv
-#   python -m virtualenv /kaggle/working/appworld_venv
-#   /kaggle/working/appworld_venv/bin/python -m pip install --upgrade pip setuptools wheel
-#   /kaggle/working/appworld_venv/bin/python -m pip install wrapt
-#   /kaggle/working/appworld_venv/bin/python -m pip install -r "$PROJECT_DIR/requirements.txt"
+# AppWorld currently requires Python >=3.11,<4.0.
 #
-# AutoDL example:
+# 24GB GPU / AutoDL example:
+#   conda create -n appworld_rl python=3.11 -y
+#   conda activate appworld_rl
+#   pip install --upgrade pip setuptools wheel
+#   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+#   pip install -r requirements.txt
+#
+# Python 3.11 is the recommended project environment. Python 3.12 may work with
+# AppWorld, but 3.11 is usually safer for the broader training stack
+# (bitsandbytes, TRL, optional vLLM/flash-attn).
+#
+# If your CUDA image is CUDA 12.4, use the cu124 PyTorch index instead:
 #   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 
 # AppWorld

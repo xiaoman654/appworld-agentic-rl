@@ -4,11 +4,29 @@
 
 本项目围绕 AppWorld 构建一个低资源 7B 工具调用智能体后训练与评估体系，核心目标不是单次跑通训练，而是系统比较 Base、SFT-only、SFT+GRPO 在多工具/API 交互任务中的差异，并分析 7B 模型的能力边界。
 
-主线模型建议从 `Qwen/Qwen2.5-Coder-7B-Instruct` 开始。Kaggle T4 * 2 用于环境验证、数据处理、基座审计、小规模 QLoRA-SFT dry run；AutoDL A800 * 2 用于正式 QLoRA-SFT、批量 rollout、QLoRA-GRPO 和最终评估。
+主线模型建议从 `Qwen/Qwen2.5-Coder-7B-Instruct` 开始。24GB 显存租机用于环境验证、数据处理、基座审计、小规模 QLoRA-SFT dry run；AutoDL A800 * 2 用于正式 QLoRA-SFT、批量 rollout、QLoRA-GRPO 和最终评估。Kaggle T4 * 2 可以作为备选，但需要隔离 Python 环境以避免 AppWorld 的 Pydantic v1 依赖与 Kaggle 预装包冲突。
 
 ## 2. 运行平台分工
 
-### Kaggle: T4 * 2
+### 24GB GPU: C0/C1/SFT Dry Run
+
+适合任务：
+
+- AppWorld 安装、数据下载、reference solution 验证。
+- 30-50 个任务的基座模型能力审计，优先使用 4-bit 推理。
+- SFT 数据构造、API 检索、任务难度标注。
+- 小规模 QLoRA-SFT dry run，例如 50-200 条样本、100-300 step。
+- rollout pipeline dry run，例如每个任务 K=2、max_steps=3。
+
+推荐配置：
+
+- Python 3.11 优先。AppWorld 当前 PyPI 要求是 `>=3.11,<4.0`，GitHub 安装示例也使用 Python 3.11。
+- CUDA 12.1 或 12.4 对应的 PyTorch。
+- QLoRA rank 8/16。
+- `seq_len=2048` 起步，稳定后尝试 3072。
+- `micro_batch=1`，`gradient_accumulation=8-16`。
+
+### Kaggle: T4 * 2, Optional
 
 适合任务：
 
@@ -606,7 +624,7 @@ python scripts/01_appworld_audit.py --split train --num-tasks 3
 
 ### Kaggle
 
-建议使用独立虚拟环境运行 AppWorld。Kaggle/Colab 预装环境里很多包依赖 Pydantic v2，而 AppWorld 0.1.x 依赖 Pydantic v1；如果直接在全局环境安装，会出现大量依赖冲突警告。
+Kaggle 作为备选环境。更推荐优先使用干净的 24GB GPU 租机。若使用 Kaggle，必须使用独立虚拟环境运行 AppWorld。Kaggle/Colab 预装环境里很多包依赖 Pydantic v2，而 AppWorld 0.1.x 依赖 Pydantic v1；如果直接在全局环境安装，会出现大量依赖冲突警告。
 
 ```bash
 cd /kaggle/working/<your-repo-dir>
